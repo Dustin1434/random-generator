@@ -1,12 +1,13 @@
 var fs = require('fs');
 var express = require('express');
 var router = express.Router();
+const path = require('path');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
     // read from data.json
-    fs.readFile('./data/data.json', 'utf8', function (err, data) {
+    fs.readFile(path.join(__dirname, '../data/data.json'), 'utf8', function (err, data) {
         // randomly select an item from data
         if (err) {
             console.log(err);

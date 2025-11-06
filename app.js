@@ -18,11 +18,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); // outer
-app.use('/random-generator', express.static(path.join(__dirname, 'random-generator/public'))); // inner
 
 
 
 app.use('/', indexRouter);
+app.use('/random', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

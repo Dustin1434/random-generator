@@ -1,21 +1,21 @@
-var fs = require('fs');
-var express = require('express');
-var router = express.Router();
-const path = require('path');
+const express = require('express');
+const router = express.Router();
+const data = require('../data/data.json'); 
 
-// Helper function to get a random fact from data.json
 function getRandomFact() {
-    const dataPath = path.join(__dirname, '../data/data.json');
-    const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
     const facts = data.facts;
-    return facts[Math.floor(Math.random() * facts.length)];
+    const index = Math.floor(Math.random() * facts.length);
+    if (!facts || facts.length === 0) {
+        return "Error: Data not loaded or 'facts' array is empty.";
+    }
+    return facts[index];
 }
 
 // Render initial page
 router.get('/', function (req, res) {
     const randomItem = getRandomFact();
     res.render('index', {
-        title: 'My Random Generator',
+        title: 'Express Random Generator By Dustin',
         randomItem: randomItem
     });
 });
